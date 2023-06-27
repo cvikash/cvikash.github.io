@@ -8,10 +8,11 @@ redirect_from:
   - /about.html
 ---
 
-This is Vikash Choudhary's home on web.
 
- I'm a PhD student in [ROLI lab](http://rolilab.com)  at Max Planck Institute of Biological Cyebernatics, Tubingen, Germany. 
+Welcome to Vikash Choudhary's digital abode.
 
-In general, I’m interested in the field of biology but specifically studies related to brain are more captivating to me. Understanding the biological foundation of the mind is one of the great unsolved frontiers of science. Once we understand the biological basis of mind or in simple words brain mind relationship then we can figure out consciousness which may sit alongside relativity, quantum physics, evolution, and the discovery of DNA as one of the paradigm shattering breakthroughs in science. It has the potential to reframe our conception of who we are in the world in which we find ourselves. That’s why my research interest lies in “Neurogenesis, Sensory and motor system, Neural excitability, Neuroimaging, Neuroengineering, Neuroheuristics, Neural oscillation and Brain computer interface”. I believe that these areas have the potential to lead us to the essence of how the brain works, simply, how the brain creates the mind and its relationship to subjective perceived reality. 
+I'm a PhD student in [ROLI lab](http://rolilab.com)  at Max Planck Institute of Biological Cyebernatics, Tubingen, Germany. 
 
-Klingon!
+Within the vast realm of knowledge, I dwell as a fervent seeker of understanding within the field of biology. However, my true passion lies in the enigmatic study of the brain, a domain that captivates my every thought. Exploring the intricate biological underpinnings of the human mind remains one of science's most profound frontiers, awaiting discovery. Just as relativity, quantum physics, evolution, and the revelation of DNA revolutionized our understanding of the world, comprehending the brain-mind relationship holds the potential to be an equally groundbreaking breakthrough. It possesses the power to reshape our perception of self within the confines of our existence.
+
+Hence, my research focuses on delving into the intriguing domains of internal brain and behavioral states, sensory and motor systems, neural excitability, neuroimaging, neuroengineering and neural oscillation. By exploring these diverse areas, I aspire to uncover the very essence of cerebral function — the mysterious workings that give rise to the human mind and its intricate interplay with our subjective perception of reality.
