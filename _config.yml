@@ -94,9 +94,9 @@ footer:
       url: "https://scholar.google.com/citations?user=G9J3MVQAAAAJ&hl=en"
 
 defaults:
-  # _posts
+  # _pages
   - scope:
-      path: ""
+      path: "about.md"
       type: posts
     values:
       layout: single
