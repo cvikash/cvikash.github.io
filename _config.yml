@@ -59,7 +59,7 @@ plugins:
 
 author:
   name   : "Vikash Choudhary"
-  avatar : "/assets/images/vikash_headshot"
+  avatar : "/assets/images/vikash_headshot.jpg"
   bio    : "Final year PhD student at Max Planck Institute for Biological Cybernetics."
   links:
     - label: "Website"
