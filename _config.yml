@@ -114,3 +114,4 @@ tag_archive:
   type: liquid
   path: /tags/
 
+logo: "assets/images/logo-no-background.png"
