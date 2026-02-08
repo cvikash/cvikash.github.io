@@ -1,0 +1,173 @@
+---
+layout: default
+---
+
+<div class="home-hero">
+  <div class="animated-bg">
+    <div class="bg-particle bg-particle-1"></div>
+    <div class="bg-particle bg-particle-2"></div>
+    <div class="bg-particle bg-particle-3"></div>
+    <div class="bg-particle bg-particle-4"></div>
+  </div>
+  <div class="home-hero__content">
+    <div class="home-hero__text">
+      <h1 class="home-hero__title">
+        <span class="title-line">Vikash Choudhary</span>
+      </h1>
+      <p class="home-hero__subtitle">
+        PhD Student in Biological Cybernetics<br>
+        <span class="subtitle-accent">Max Planck Institute</span>
+      </p>
+      <p class="home-hero__description">
+        Researching neural mechanisms underlying internal states and behavioral transitions 
+        in zebrafish through advanced imaging and computational modeling.
+      </p>
+      <div class="home-hero__actions">
+        <a href="/about/" class="btn btn--primary">About My Research</a>
+        <a href="/projects/" class="btn btn--secondary">View Projects</a>
+      </div>
+    </div>
+    <div class="home-hero__visual">
+      {% if site.author.avatar %}
+        <div class="home-hero__avatar">
+          <img src="{{ site.author.avatar }}" alt="{{ site.author.name }}">
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<section class="research-overview">
+  <div class="container">
+    <h2 class="section-title">Research Focus</h2>
+    <div class="research-areas">
+      <div class="research-area-card">
+        <div class="research-area-card__icon">🧠</div>
+        <h3>Neural Mechanisms</h3>
+        <p>Understanding how the brain maintains and transitions between different internal states</p>
+      </div>
+      <div class="research-area-card">
+        <div class="research-area-card__icon">🐟</div>
+        <h3>Zebrafish Quiescence</h3>
+        <p>Investigating neural substrates of quiescence substates using whole-brain imaging</p>
+      </div>
+      <div class="research-area-card">
+        <div class="research-area-card__icon">⚙️</div>
+        <h3>Computational Modeling</h3>
+        <p>Applying control theory and systems biology to understand neural circuits</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="home-projects">
+  <div class="container">
+    <h2 class="section-title">Research Projects</h2>
+    <div class="projects-table">
+      <div class="project-row project-row-header">
+        <div class="project-col-title">Project</div>
+        <div class="project-col-description">Description</div>
+        <div class="project-col-links">Links</div>
+      </div>
+
+      <div class="project-row">
+        <div class="project-col-title">
+          <h3 class="project-title-compact">Neural and behavioral organization of rapid eye movement sleep in zebrafish</h3>
+          <span class="project-year">2023</span>
+        </div>
+        <div class="project-col-description">
+          <p>Discovered two distinct quiescent states in larval zebrafish sleep (qREM and qNREM), revealing the evolutionary origin of REM sleep. Used high-resolution behavioral imaging and brain-wide neural recordings.</p>
+        </div>
+        <div class="project-col-links">
+          <a href="/projects/rem-sleep-zebrafish/" class="project-link">Details</a>
+          <a href="https://www.biorxiv.org/content/10.1101/2023.08.28.555077v1.full" target="_blank" class="project-link">Paper</a>
+        </div>
+      </div>
+
+      <div class="project-row">
+        <div class="project-col-title">
+          <h3 class="project-title-compact">Alterations of specific cortical GABAergic circuits in Down syndrome</h3>
+          <span class="project-year">2020</span>
+        </div>
+        <div class="project-col-description">
+          <p>Developed computational methods to detect Up/Down states in cortical LFP recordings. Revealed how specific GABAergic circuit alterations lead to abnormal network activity in Down syndrome mouse models.</p>
+        </div>
+        <div class="project-col-links">
+          <a href="/projects/down-syndrome-gaba-circuits/" class="project-link">Details</a>
+          <a href="https://elifesciences.org/articles/58731" target="_blank" class="project-link">Paper</a>
+        </div>
+      </div>
+
+      <div class="project-row">
+        <div class="project-col-title">
+          <h3 class="project-title-compact">Quiescence Substate Analysis</h3>
+          <span class="project-year">Ongoing</span>
+        </div>
+        <div class="project-col-description">
+          <p>Developing novel computational methods to identify and characterize different substates of quiescence through behavioral and neural data analysis using machine learning approaches.</p>
+        </div>
+        <div class="project-col-links">
+          <a href="#" class="project-link">Details</a>
+          <a href="https://github.com/cvikash" target="_blank" class="project-link">GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-row">
+        <div class="project-col-title">
+          <h3 class="project-title-compact">Whole-Brain Imaging Pipeline</h3>
+          <span class="project-year">Ongoing</span>
+        </div>
+        <div class="project-col-description">
+          <p>Developing automated pipelines for processing and analyzing large-scale whole-brain imaging data, including image registration, motion correction, and neural activity extraction.</p>
+        </div>
+        <div class="project-col-links">
+          <a href="#" class="project-link">Details</a>
+          <a href="https://github.com/cvikash" target="_blank" class="project-link">GitHub</a>
+        </div>
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="/projects/" class="btn btn--secondary">View All Projects →</a>
+    </div>
+  </div>
+</section>
+
+<section class="featured-content">
+  <div class="container">
+    <div class="featured-grid">
+      <div class="featured-card">
+        <h3>Current Work</h3>
+        <p>My research combines advanced imaging techniques, behavioral analysis, and computational modeling to uncover the fundamental principles regulating internal state transitions.</p>
+        <a href="/about/" class="featured-card__link">Learn More →</a>
+      </div>
+      <div class="featured-card">
+        <h3>Publications</h3>
+        <p>Contributing to the understanding of neural mechanisms underlying behavioral states through peer-reviewed research.</p>
+        <a href="/cv/" class="featured-card__link">View CV →</a>
+      </div>
+      <div class="featured-card">
+        <h3>Media</h3>
+        <p>Talks, presentations, and science communication activities related to my research.</p>
+        <a href="/media/" class="featured-card__link">View Media →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if site.author.links %}
+<section class="connect-section">
+  <div class="container">
+    <h2 class="section-title">Connect</h2>
+    <div class="social-links">
+      {% for link in site.author.links %}
+        <a href="{{ link.url }}" class="social-link" target="_blank" rel="noopener noreferrer">
+          <i class="{{ link.icon }}"></i>
+          <span>{{ link.label }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+

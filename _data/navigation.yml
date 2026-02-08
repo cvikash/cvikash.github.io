@@ -5,6 +5,8 @@ main:
     url: /projects/
   - title: "CV"
     url: /cv/
+  - title: "Media"
+    url: /media/
   - title: "Posts"
     url: /posts/
   - title: "Tags"

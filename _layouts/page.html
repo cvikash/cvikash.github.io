@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+  <div class="page__inner-wrap">
+    {% unless page.header.overlay_color or page.header.overlay_image %}
+      <header>
+        <h1 id="page-title" class="page__title" itemprop="headline">
+          {{ page.title | default: site.title | markdownify | remove: "<p>" | remove: "</p>" }}
+        </h1>
+        {% if page.read_time %}
+          <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> {% include read-time.html %}</p>
+        {% endif %}
+      </header>
+    {% endunless %}
+
+    <section class="page__content" itemprop="text">
+      {{ content }}
+    </section>
+
+    {% if page.share %}{% include social-share.html %}{% endif %}
+  </div>
+</article>
+

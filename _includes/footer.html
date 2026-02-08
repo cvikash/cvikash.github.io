@@ -1,0 +1,20 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      {% if site.footer.links %}
+        <div class="footer-links">
+          {% for link in site.footer.links %}
+            <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="footer-link">
+              <i class="{{ link.icon }}"></i>
+              <span>{{ link.label }}</span>
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="footer-text">
+        <p>&copy; {{ 'now' | date: "%Y" }} {{ site.author.name | default: site.title }}. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+

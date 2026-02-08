@@ -1,0 +1,22 @@
+<script>
+  // Remove no-js class
+  document.documentElement.classList.remove('no-js');
+  
+  // Ensure all navigation links are visible
+  document.addEventListener('DOMContentLoaded', function() {
+    const visibleLinks = document.querySelector('.visible-links');
+    const hiddenLinks = document.querySelector('.hidden-links');
+    
+    if (visibleLinks && hiddenLinks) {
+      // Move any hidden links back to visible
+      const hiddenItems = hiddenLinks.querySelectorAll('li');
+      hiddenItems.forEach(item => {
+        visibleLinks.appendChild(item);
+      });
+    }
+  });
+</script>
+{% if site.search == true %}
+  <script src="{{ '/assets/js/lunr/lunr.min.js' | relative_url }}"></script>
+{% endif %}
+
