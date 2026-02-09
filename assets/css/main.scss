@@ -254,7 +254,7 @@ a {
     align-items: center;
     justify-content: space-between;
     gap: var(--space-sm);
-    flex-wrap: nowrap;
+    flex-wrap: nowrap !important; // Force single row on all screens
     min-width: 0; // Allow flex items to shrink
     
     .site-logo {
@@ -311,8 +311,17 @@ a {
       gap: 0.25rem;
       flex-shrink: 0;
       margin-left: auto;
-      flex-wrap: nowrap;
+      flex-wrap: nowrap !important; // Force single row
       min-width: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      
+      &::-webkit-scrollbar {
+        display: none;
+      }
       
       li {
         flex-shrink: 0;
@@ -817,6 +826,24 @@ a {
 // Responsive Design - Mobile First
 // ============================================
 
+// Mobile devices (up to 768px) - Force single row navigation
+@media (max-width: 768px) {
+  .masthead .greedy-nav {
+    flex-wrap: nowrap !important;
+    overflow: hidden;
+    
+    .visible-links {
+      order: 0 !important;
+      width: auto !important;
+      flex: 1 1 auto !important;
+      margin-top: 0 !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+    }
+  }
+}
+
 // Mobile devices (up to 640px)
 @media (max-width: 640px) {
   // Base typography adjustments
@@ -855,23 +882,23 @@ a {
       }
       
       .visible-links {
-        order: 0; // Keep links in the main row
-        width: auto;
-        flex: 1 1 auto;
-        min-width: 0; // Allow flex shrinking
-        max-width: calc(100vw - 200px); // Reserve space for logo, title, and search
-        margin-top: 0;
+        order: 0 !important; // Keep links in the main row - force override
+        width: auto !important;
+        flex: 1 1 auto !important;
+        min-width: 0;
+        max-width: calc(100vw - 180px) !important; // Reserve space for logo, title, and search
+        margin-top: 0 !important;
         margin-left: auto;
         margin-right: var(--space-xs);
         justify-content: flex-end;
         gap: 0.25rem;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
+        flex-wrap: nowrap !important; // Force single row
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch;
         scroll-behavior: smooth;
-        scrollbar-width: none; // Hide scrollbar on Firefox
-        -ms-overflow-style: none; // Hide scrollbar on IE/Edge
+        scrollbar-width: none;
+        -ms-overflow-style: none;
         
         // Hide scrollbar on WebKit browsers
         &::-webkit-scrollbar {
@@ -882,17 +909,18 @@ a {
         padding: 0 4px;
         
         li {
-          flex-shrink: 0; // Prevent items from shrinking
+          flex-shrink: 0 !important; // Prevent items from shrinking
+          display: list-item !important;
         }
         
         a {
           padding: var(--space-xs) 0.5rem;
           font-size: 0.8125rem;
-          min-height: 36px; // Better touch target
+          min-height: 36px;
           min-width: fit-content;
-          display: flex;
+          display: flex !important;
           align-items: center;
-          white-space: nowrap; // Prevent text wrapping
+          white-space: nowrap !important;
         }
       }
       
@@ -1138,24 +1166,41 @@ a {
     }
   }
   
+  // Navigation stays in one row on tablets too
   .masthead .greedy-nav {
-    flex-wrap: wrap;
+    flex-wrap: nowrap !important;
+    gap: var(--space-xs);
+    overflow: hidden;
+    align-items: center;
+    
+    .site-logo img {
+      height: 40px;
+      flex-shrink: 0;
+    }
     
     .site-title {
-      font-size: 1.125rem;
-      margin-left: var(--space-sm);
+      font-size: 1rem;
+      max-width: 140px;
+      margin-left: var(--space-xs);
+      flex-shrink: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     
     .visible-links {
-      order: 3;
-      width: 100%;
-      margin-top: var(--space-sm);
-      margin-left: 0;
-      justify-content: flex-start;
+      order: 0 !important;
+      width: auto !important;
+      flex: 1 1 auto !important;
+      min-width: 0;
+      max-width: calc(100vw - 280px) !important;
+      margin-top: 0 !important;
+      margin-left: auto;
+      margin-right: var(--space-xs);
+      justify-content: flex-end;
       gap: 0.25rem;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      overflow-y: hidden;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
       -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
       scrollbar-width: none;
@@ -1165,10 +1210,10 @@ a {
         display: none;
       }
       
-      padding-bottom: 2px;
+      padding: 0 4px;
       
       li {
-        flex-shrink: 0;
+        flex-shrink: 0 !important;
       }
       
       a {
@@ -1176,7 +1221,15 @@ a {
         font-size: 0.875rem;
         min-height: 40px;
         white-space: nowrap;
+        display: flex;
+        align-items: center;
       }
+    }
+    
+    .search__toggle {
+      margin-left: 0;
+      padding: var(--space-xs);
+      flex-shrink: 0;
     }
   }
   
