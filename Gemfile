@@ -1,17 +1,12 @@
 source "https://rubygems.org"
 
+# GitHub Pages uses the github-pages gem which includes Jekyll and all plugins
 gem "github-pages", group: :jekyll_plugins
 
+# Platform-specific gems
 gem "tzinfo-data"
 gem "wdm", "~> 0.1.0" if Gem.win_platform?
-# Using remote_theme in _config.yml, so this gem is optional for local development
-# gem 'minimal-mistakes-jekyll'
-# If you have any plugins, put them here!
-group :jekyll_plugins do
-  gem "jekyll-paginate"
-  gem "jekyll-sitemap"
-  gem "jekyll-gist"
-  gem "jekyll-feed"
-  gem "jemoji"
-  gem "jekyll-include-cache"
-end
+
+# Note: All Jekyll plugins (jekyll-paginate, jekyll-sitemap, jekyll-gist, 
+# jekyll-feed, jemoji, jekyll-include-cache) are already included in github-pages gem
+# and should be listed in _config.yml plugins section, not here
