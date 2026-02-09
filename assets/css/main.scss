@@ -835,40 +835,71 @@ a {
     }
     
     .greedy-nav {
-      flex-wrap: wrap;
-      gap: var(--space-sm);
+      flex-wrap: nowrap; // Keep nav items in a row
+      gap: var(--space-xs);
+      overflow: hidden; // Prevent overall nav from overflowing
+      align-items: center;
       
       .site-logo img {
         height: 36px;
+        flex-shrink: 0;
       }
       
       .site-title {
-        font-size: 0.9375rem;
-        max-width: 120px;
+        font-size: 0.875rem;
+        max-width: 90px; // Reduced to give more space for links
         margin-left: var(--space-xs);
+        flex-shrink: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       
       .visible-links {
-        order: 3;
-        width: 100%;
-        margin-top: var(--space-xs);
-        margin-left: 0;
-        justify-content: flex-start;
-        gap: 0.125rem;
-        flex-wrap: wrap;
+        order: 0; // Keep links in the main row
+        width: auto;
+        flex: 1 1 auto;
+        min-width: 0; // Allow flex shrinking
+        max-width: calc(100vw - 200px); // Reserve space for logo, title, and search
+        margin-top: 0;
+        margin-left: auto;
+        margin-right: var(--space-xs);
+        justify-content: flex-end;
+        gap: 0.25rem;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
+        scroll-behavior: smooth;
+        scrollbar-width: none; // Hide scrollbar on Firefox
+        -ms-overflow-style: none; // Hide scrollbar on IE/Edge
+        
+        // Hide scrollbar on WebKit browsers
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        
+        // Add padding for better scroll experience
+        padding: 0 4px;
+        
+        li {
+          flex-shrink: 0; // Prevent items from shrinking
+        }
         
         a {
-          padding: var(--space-xs) 0.375rem;
+          padding: var(--space-xs) 0.5rem;
           font-size: 0.8125rem;
           min-height: 36px; // Better touch target
+          min-width: fit-content;
           display: flex;
           align-items: center;
+          white-space: nowrap; // Prevent text wrapping
         }
       }
       
       .search__toggle {
-        margin-left: auto;
+        margin-left: 0;
         padding: var(--space-xs);
+        flex-shrink: 0;
       }
     }
   }
@@ -1122,11 +1153,29 @@ a {
       margin-left: 0;
       justify-content: flex-start;
       gap: 0.25rem;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      
+      padding-bottom: 2px;
+      
+      li {
+        flex-shrink: 0;
+      }
       
       a {
         padding: var(--space-xs) 0.5rem;
         font-size: 0.875rem;
         min-height: 40px;
+        white-space: nowrap;
       }
     }
   }
