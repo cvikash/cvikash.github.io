@@ -42,12 +42,12 @@ classes: wide
     <div class="cv-item">
       <h3 class="cv-title">Technical Skills</h3>
       <p class="cv-description">
-        <strong>Experimental Techniques:</strong> Two-photon calcium imaging, light-sheet microscopy, 
-        optogenetics, behavioral tracking, neural data acquisition, electrophysiology<br><br>
-        <strong>Computational Methods:</strong> Machine learning, network analysis, dynamical systems 
-        modeling, statistical analysis, signal processing, time-series analysis<br><br>
-        <strong>Programming & Tools:</strong> Python, MATLAB, ImageJ/Fiji, DeepLabCut, computational 
-        neuroscience toolboxes, version control (Git), data visualization
+        <strong>Programming Languages:</strong> Python, MATLAB, Julia, C, C++, Rust, R, Java, JavaScript, HTML<br><br>
+        <strong>Computational & Data Science:</strong> Machine learning, data science, network analysis, dynamical systems modeling, statistical analysis, signal processing, time-series analysis, data visualization, MySQL<br><br>
+        <strong>Experimental Techniques:</strong> Two-photon calcium imaging, light-sheet microscopy, optogenetics, behavioral tracking, neural data acquisition, electrophysiology, fMRI, laboratory skills<br><br>
+        <strong>Software & Tools:</strong> ImageJ/Fiji, DeepLabCut, MATLAB, Python toolboxes, Git, Blender, LabView, ZeroMQ, Arduino IDE, SolidWorks, Amira, Pymol, Oncomine, Microsoft Office, PowerPoint, computational neuroscience toolboxes<br><br>
+        <strong>Domains:</strong> Neuroscience, biology, research, programming<br><br>
+        <strong>Operating Systems:</strong> Linux, Windows, Mac
       </p>
     </div>
 

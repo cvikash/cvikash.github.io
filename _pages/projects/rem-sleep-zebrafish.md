@@ -89,6 +89,35 @@ classes: wide
       </p>
     </div>
 
+    <!-- Low Arousal State -->
+    <div class="content-card blog-style">
+      <h2 style="margin-bottom: 1.5rem;">A True Sleep State: Low Arousal, Not Vigilance</h2>
+      
+      <p>
+        One critical question we needed to answer was whether these quiescent states were actually sleep, or just periods 
+        of low activity while the fish remained vigilant. To distinguish between sleep and quiet wakefulness, we measured 
+        arousal thresholds—how much stimulation it takes to wake the fish up.
+      </p>
+
+      <div class="figure-item" style="margin: 2rem 0;">
+        <div class="figure-image">
+          <img src="/assets/images/project_qREM/figure2.png" alt="Figure 2: Arousal threshold analysis showing qREM and qNREM are true sleep states" loading="lazy">
+        </div>
+        <div class="figure-caption">
+          <strong>Figure 2:</strong> Arousal threshold measurements demonstrate that both qREM and qNREM states show 
+          significantly increased arousal thresholds compared to wakefulness, confirming these are true sleep states 
+          rather than periods of quiet vigilance.
+        </div>
+      </div>
+
+      <p>
+        Our measurements showed that during both qREM and qNREM, zebrafish required much stronger stimulation to wake up 
+        compared to when they were awake. This wasn't just quiet behavior—these were genuine sleep states with reduced 
+        responsiveness to the environment. The fish weren't just sitting still and watching; they were truly asleep, 
+        with their brains in a fundamentally different state.
+      </p>
+    </div>
+
     <!-- The Blind Fish Experiment -->
     <div class="content-card blog-style">
       <h2 style="margin-bottom: 1.5rem;">Testing the "Scanning Hypothesis"</h2>
@@ -124,6 +153,35 @@ classes: wide
       </p>
     </div>
 
+    <!-- Circadian Organization -->
+    <div class="content-card blog-style">
+      <h2 style="margin-bottom: 1.5rem;">Sleep Across the Day: Circadian Organization of States</h2>
+      
+      <p>
+        Sleep doesn't happen in isolation—it's organized across the 24-hour day-night cycle. We wanted to understand 
+        how qREM and qNREM states are distributed throughout the circadian cycle. Do they follow patterns similar to 
+        mammalian sleep? How do transitions between states change from day to night?
+      </p>
+
+      <div class="figure-item" style="margin: 2rem 0;">
+        <div class="figure-image">
+          <img src="/assets/images/project_qREM/Figure_3.png" alt="Figure 3: Circadian organization of sleep states across 24 hours" loading="lazy">
+        </div>
+        <div class="figure-caption">
+          <strong>Figure 3:</strong> The organization of qREM and qNREM states across the 24-hour circadian cycle reveals 
+          distinct patterns of state distribution and transitions, showing how sleep architecture is regulated by both 
+          circadian rhythms and homeostatic sleep pressure.
+        </div>
+      </div>
+
+      <p>
+        What we found was a sophisticated organization of sleep states across the day and night. The distribution of qREM 
+        and qNREM followed circadian patterns, with clear differences in how these states were organized during light and 
+        dark periods. This circadian regulation of sleep states suggests that the two-state sleep architecture in zebrafish 
+        is not just a simple on-off switch, but a complex, temporally organized system that adapts to the day-night cycle.
+      </p>
+    </div>
+
     <!-- Brain-Wide Imaging -->
     <div class="content-card blog-style">
       <h2 style="margin-bottom: 1.5rem;">What the Brain Reveals: Dynamic Trajectories, Not Fixed Points</h2>
@@ -136,12 +194,12 @@ classes: wide
 
       <div class="figure-item" style="margin: 2rem 0;">
         <div class="figure-image">
-          <img src="/assets/images/project_qREM/Figure_3.png" alt="Figure 3: Brain-wide neural activity during qREM" loading="lazy">
+          <img src="/assets/images/project_qREM/figure5..png" alt="Figure 5: Brain-wide neural activity during qREM" loading="lazy">
         </div>
         <div class="figure-caption">
-          <strong>Figure 3:</strong> Brain-wide neural activity during qREM follows smooth, committed trajectories through 
+          <strong>Figure 5:</strong> Brain-wide neural activity during qREM follows smooth, committed trajectories through 
           state-space. Unlike the fixed-point attractor model from invertebrate studies, vertebrate sleep involves dynamic, 
-          organized neural activity.
+          organized neural activity with complex state-space dynamics.
         </div>
       </div>
 
@@ -160,31 +218,33 @@ classes: wide
       </p>
     </div>
 
-    <!-- Eye Movement Patterns -->
+    <!-- Decoding Time from Neural Activity -->
     <div class="content-card blog-style">
-      <h2 style="margin-bottom: 1.5rem;">The Signature of REM: Eye Movements Tell the Story</h2>
+      <h2 style="margin-bottom: 1.5rem;">Time Encoded in Neural Activity: Decoding Temporal Structure</h2>
       
       <p>
-        The eye movements during qREM weren't just present—they were highly organized. We tracked every movement, 
-        analyzed the patterns, and found that these weren't random twitches. They had structure, rhythm, and purpose.
+        The organized trajectories we observed during qREM raised an intriguing question: does the brain maintain a sense 
+        of time during sleep? Can we decode temporal information from the neural population activity? We tested whether 
+        the patterns of neural activity during sleep contain information about elapsed time within a sleep episode.
       </p>
 
       <div class="figure-item" style="margin: 2rem 0;">
         <div class="figure-image">
-          <img src="/assets/images/project_qREM/figure2.png" alt="Figure 2: Eye movement patterns during sleep states" loading="lazy">
+          <img src="/assets/images/project_qREM/Figure_6.png" alt="Figure 6: Decoding time from neural population activity during sleep" loading="lazy">
         </div>
         <div class="figure-caption">
-          <strong>Figure 2:</strong> Detailed analysis of eye movement patterns reveals the distinct characteristics of 
-          qREM versus qNREM states. The rapid eye movements during qREM show organized, rhythmic patterns that are 
-          maintained even in the absence of vision.
+          <strong>Figure 6:</strong> Neural population activity during qREM and qNREM states contains decodable temporal 
+          information. Using machine learning approaches, we can predict elapsed time within sleep episodes from the 
+          patterns of brain-wide neural activity, revealing that time is encoded in the dynamic trajectories of sleep states.
         </div>
       </div>
 
       <p>
-        This organized pattern of eye movements during sleep makes sense if you think about it from an evolutionary 
-        perspective. Motor systems need to stay active, even during rest. If you completely shut down eye movement 
-        systems for hours, they might not work properly when you wake up. REM sleep might be nature's way of keeping 
-        these systems "warmed up" and ready to go.
+        Remarkably, we found that we could decode elapsed time from the neural population activity during both qREM and 
+        qNREM states. This means that the brain maintains a temporal representation even during sleep—the neural trajectories 
+        aren't just random paths through state-space, but contain structured information about how much time has passed 
+        within a sleep episode. This temporal encoding suggests that sleep states have an internal temporal structure, 
+        with the brain tracking time even when disconnected from external cues.
       </p>
     </div>
 
@@ -209,16 +269,6 @@ classes: wide
         It's an organized, dynamic process with its own internal structure. The brain during sleep isn't idle—it's 
         actively maintaining and organizing itself.
       </p>
-
-      <div class="figure-item" style="margin: 2rem 0;">
-        <div class="figure-image">
-          <img src="/assets/images/project_qREM/figure5..png" alt="Figure 5: Additional analysis of sleep state organization" loading="lazy">
-        </div>
-        <div class="figure-caption">
-          <strong>Figure 5:</strong> Further analysis reveals the complex organization of sleep states, including 
-          transitions between states, circadian regulation, and the relationship between behavioral and neural dynamics.
-        </div>
-      </div>
     </div>
 
     <!-- The Bigger Picture -->

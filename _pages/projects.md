@@ -52,15 +52,29 @@ classes: wide
 
       <div class="project-row">
         <div class="project-col-title">
-          <h3 class="project-title-compact">Quiescence Substate Analysis</h3>
-          <span class="project-year">Ongoing</span>
+          <h3 class="project-title-compact">Behavioral motifs identification in freely swimming zebrafish using autoregressive hidden markov models (ARHMMs)</h3>
+          <span class="project-year">2023</span>
         </div>
         <div class="project-col-description">
-          <p>Developing novel computational methods to identify and characterize different substates of quiescence through behavioral and neural data analysis using machine learning approaches.</p>
+          <p>Developing and applying autoregressive hidden Markov models to identify behavioral states from high-resolution tracking data. Implemented in Julia with applications to zebrafish behavioral analysis, revealing organized behavioral motifs and state transitions.</p>
         </div>
         <div class="project-col-links">
-          <a href="#" class="project-link">Details</a>
-          <a href="https://github.com/cvikash" target="_blank" class="project-link">GitHub</a>
+          <a href="/projects/arhmm-behavioral-motifs/" class="project-link">Details</a>
+          <a href="https://github.com/cvikash/_HMMs.jl" target="_blank" class="project-link">GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-row">
+        <div class="project-col-title">
+          <h3 class="project-title-compact">Visual-area-specific tonic modulation of GABA release by endocannabinoids in neocortex</h3>
+          <span class="project-year">2022</span>
+        </div>
+        <div class="project-col-description">
+          <p>Developed end-to-end analysis pipeline for two-photon calcium imaging data (motion registration, source extraction, deconvolution, data analysis). Revealed how CB1+ interneurons differentially control neural activity and coordination in primary (V1) versus associative (V2M) visual cortex.</p>
+        </div>
+        <div class="project-col-links">
+          <a href="/projects/cb1-visual-cortex/" class="project-link">Details</a>
+          <a href="https://doi.org/10.1016/j.celrep.2022.111202" target="_blank" class="project-link">Paper</a>
         </div>
       </div>
 

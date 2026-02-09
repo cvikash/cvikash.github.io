@@ -621,13 +621,21 @@ a {
 }
 
 .home-projects {
-  padding: var(--space-2xl) var(--space-xl);
+  padding: var(--space-2xl) var(--space-xs) var(--space-2xl) var(--space-md); // Small left padding
   background: var(--color-bg-primary);
+  
+  .container {
+    max-width: 100%; // Full width
+    margin: 0;
+    padding: 0; // No container padding
+    width: 100%;
+  }
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 98%; // Use 98% of viewport width - almost full width
   margin: 0 auto;
+  padding: 0 var(--space-xs); // Minimal side padding (1/4 of typical)
 }
 
 .section-title {
@@ -639,14 +647,18 @@ a {
 
 .research-areas {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--space-xl);
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .research-area-card {
   background: var(--color-bg-primary);
-  padding: var(--space-2xl);
-  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-base);
@@ -654,27 +666,29 @@ a {
   animation: fadeInUp 0.6s ease-out;
   
   &:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
     border-color: var(--color-primary-light);
   }
   
   &__icon {
-    font-size: 3rem;
-    margin-bottom: var(--space-lg);
+    font-size: 2rem;
+    margin-bottom: var(--space-sm);
     display: block;
   }
   
   h3 {
-    font-size: 1.5rem;
-    margin-bottom: var(--space-md);
+    font-size: 1.125rem;
+    margin-bottom: var(--space-xs);
     color: var(--color-primary);
+    line-height: 1.3;
   }
   
   p {
     color: var(--color-text-secondary);
-    line-height: 1.7;
+    line-height: 1.5;
     margin: 0;
+    font-size: 0.875rem;
   }
 }
 
@@ -1112,7 +1126,7 @@ a {
   
   // Page hero
   .page-hero {
-    padding: var(--space-lg) var(--space-md);
+    padding: var(--space-lg) var(--space-xs); // Left/right padding reduced to 1/4
     
     &__title {
       font-size: 1.75rem;
@@ -1286,11 +1300,15 @@ a {
 // Page Layout Styles
 // ============================================
 .page-hero {
-  padding: var(--space-xl) var(--space-xl) var(--space-lg);
+  padding: var(--space-xl) 0 var(--space-lg); // No horizontal padding
   background: linear-gradient(135deg, 
     rgba(26, 86, 219, 0.05) 0%, 
     rgba(14, 165, 233, 0.05) 100%);
   text-align: center;
+  
+  .container {
+    padding: 0 var(--space-xs); // Minimal padding only on container
+  }
   
   &__title {
     font-size: clamp(2rem, 4vw, 3rem);
@@ -1311,8 +1329,12 @@ a {
 }
 
 .page-content {
-  padding: var(--space-lg) var(--space-xl) var(--space-2xl);
+  padding: var(--space-lg) 0 var(--space-2xl); // No horizontal padding
   background: var(--color-bg-primary);
+  
+  .container {
+    padding: 0 var(--space-xs); // Minimal padding only on container
+  }
 }
 
 .content-card {
@@ -1411,19 +1433,20 @@ a {
 // Projects Page Styles - Compact Table View
 // ============================================
 .projects-table {
-  margin: var(--space-lg) 0;
+  margin: var(--space-lg) 0; // Standard margins
   background: var(--color-bg-primary);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-xl); // Rounded on all corners
   overflow: hidden;
   box-shadow: var(--shadow-sm);
+  width: 100%; // Ensure full width
 }
 
 .project-row {
   display: grid;
-  grid-template-columns: 2fr 3fr 1fr;
+  grid-template-columns: 2.5fr 4.5fr 1fr; // More space for description
   gap: var(--space-lg);
-  padding: var(--space-lg) var(--space-xl);
+  padding: var(--space-lg) var(--space-md); // Balanced padding
   border-bottom: 1px solid var(--color-border);
   align-items: start;
   transition: background-color var(--transition-fast);
@@ -1440,14 +1463,14 @@ a {
     background: var(--color-bg-secondary);
     font-weight: 600;
     color: var(--color-text-primary);
-    padding: var(--space-md) var(--space-xl);
+    padding: var(--space-md) var(--space-md); // Balanced padding
     border-bottom: 2px solid var(--color-primary);
   }
 }
 
 .project-col-title {
   .project-title-compact {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     margin: 0 0 var(--space-xs) 0;
     color: var(--color-text-primary);
