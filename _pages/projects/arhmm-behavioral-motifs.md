@@ -5,13 +5,6 @@ permalink: /projects/arhmm-behavioral-motifs/
 classes: wide
 ---
 
-<section class="page-hero">
-  <div class="container">
-    <h1 class="page-hero__title">Behavioral motifs identification in freely swimming zebrafish using autoregressive hidden markov models (ARHMMs)</h1>
-    <p class="page-hero__subtitle">Decoding behavioral states from high-resolution tracking data using machine learning</p>
-  </div>
-</section>
-
 <section class="page-content">
   <div class="container">
     <!-- GitHub Info -->

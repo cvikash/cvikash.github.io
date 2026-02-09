@@ -5,13 +5,6 @@ permalink: /projects/down-syndrome-gaba-circuits/
 classes: wide
 ---
 
-<section class="page-hero">
-  <div class="container">
-    <h1 class="page-hero__title">Alterations of specific cortical GABAergic circuits underlie abnormal network activity in a mouse model of Down syndrome</h1>
-    <p class="page-hero__subtitle">Understanding cognitive deficits through cortical network dynamics and Up/Down state detection</p>
-  </div>
-</section>
-
 <section class="page-content">
   <div class="container">
     <!-- Publication Info -->

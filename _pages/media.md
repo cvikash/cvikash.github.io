@@ -22,6 +22,17 @@ classes: wide
       
       <div class="media-video-container">
         <div class="media-video-item">
+          <h3>Fish behavior during different behavioral states</h3>
+          <p class="media-meta">Research Video</p>
+          <div class="video-wrapper">
+            <video controls width="100%" style="border-radius: var(--radius-md); background: #000;">
+              <source src="/assets/images/media/Supplementary_video1.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+        
+        <div class="media-video-item" style="margin-top: 3rem;">
           <h3>Fish whole-brain while transitioning from wake to sleep</h3>
           <p class="media-meta">Research Video</p>
           <div class="video-wrapper">

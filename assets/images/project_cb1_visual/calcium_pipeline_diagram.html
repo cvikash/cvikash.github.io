@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Photon Calcium Imaging Pipeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Mono:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1147 50%, #2d1b69 100%);
+            font-family: 'Space Mono', monospace;
+            min-height: 100vh;
+            padding: 60px 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-family: 'JetBrains Mono', monospace;
+            color: #00ff88;
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5),
+                         0 0 40px rgba(0, 255, 136, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(0, 255, 136, 0.5), 0 0 40px rgba(0, 255, 136, 0.3); }
+            to { text-shadow: 0 0 30px rgba(0, 255, 136, 0.8), 0 0 60px rgba(0, 255, 136, 0.5); }
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #8b9dc3;
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+        }
+        
+        .pipeline-stage {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+        
+        .pipeline-stage:nth-child(1) { animation-delay: 0.1s; }
+        .pipeline-stage:nth-child(2) { animation-delay: 0.2s; }
+        .pipeline-stage:nth-child(3) { animation-delay: 0.3s; }
+        .pipeline-stage:nth-child(4) { animation-delay: 0.4s; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .pipeline-stage:hover {
+            transform: translateY(-8px);
+            border-color: #00ff88;
+            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .stage-number {
+            position: absolute;
+            top: -25px;
+            left: 30px;
+            background: linear-gradient(135deg, #00ff88, #00d4aa);
+            color: #0a0e27;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4);
+        }
+        
+        .stage-title {
+            color: #00ff88;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .stage-description {
+            color: #b8c5db;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        
+        .visual-container {
+            background: rgba(10, 14, 39, 0.6);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            margin-top: 20px;
+        }
+        
+        canvas {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .arrow-down {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-top: 40px solid rgba(0, 255, 136, 0.5);
+            margin: 20px auto;
+            position: relative;
+            animation: bounce 2s infinite;
+        }
+        
+        .arrow-down::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: -2px;
+            width: 4px;
+            height: 30px;
+            background: rgba(0, 255, 136, 0.5);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+        
+        .tech-label {
+            display: inline-block;
+            background: rgba(0, 212, 170, 0.15);
+            color: #00ff88;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin: 5px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            font-weight: bold;
+        }
+        
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .metric-card {
+            background: rgba(0, 255, 136, 0.08);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #00ff88;
+        }
+        
+        .metric-label {
+            color: #8b9dc3;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+        
+        .metric-value {
+            color: #00ff88;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+        
+        .grid-noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image: 
+                repeating-linear-gradient(0deg, rgba(0,255,136,0.1) 0px, transparent 1px, transparent 2px, rgba(0,255,136,0.1) 3px),
+                repeating-linear-gradient(90deg, rgba(0,255,136,0.1) 0px, transparent 1px, transparent 2px, rgba(0,255,136,0.1) 3px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-noise"></div>
+    
+    <div class="container">
+        <h1>Two-Photon Calcium Imaging Pipeline</h1>
+        <div class="subtitle">Rodent Visual Cortex • 30Hz Acquisition</div>
+        
+        <!-- Stage 1: Raw Images -->
+        <div class="pipeline-stage">
+            <div class="stage-number">1</div>
+            <h2 class="stage-title">Raw Calcium Imaging Data</h2>
+            <p class="stage-description">
+                High-resolution two-photon microscopy captures fluorescent calcium indicators (GCaMP) 
+                in neurons of the visual cortex. Raw time-series imaging data contains motion artifacts 
+                and requires preprocessing before analysis.
+            </p>
+            
+            <div class="visual-container">
+                <canvas id="rawCanvas" width="800" height="250"></canvas>
+            </div>
+            
+            <div class="metrics">
+                <div class="metric-card">
+                    <div class="metric-label">Frame Rate</div>
+                    <div class="metric-value">30 Hz</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Resolution</div>
+                    <div class="metric-value">512×512</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Indicator</div>
+                    <div class="metric-value">GCaMP6s</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <span class="tech-label">TIFF Stack</span>
+                <span class="tech-label">HDF5</span>
+                <span class="tech-label">2-Photon Microscopy</span>
+            </div>
+        </div>
+        
+        <div class="arrow-down"></div>
+        
+        <!-- Stage 2: Motion Correction -->
+        <div class="pipeline-stage">
+            <div class="stage-number">2</div>
+            <h2 class="stage-title">Motion Correction</h2>
+            <p class="stage-description">
+                Brain tissue moves during imaging due to breathing, heartbeat, and movement. 
+                Rigid and non-rigid registration algorithms align frames to compensate for these shifts, 
+                producing stable, artifact-free videos.
+            </p>
+            
+            <div class="visual-container">
+                <canvas id="motionCanvas" width="800" height="300"></canvas>
+            </div>
+            
+            <div class="metrics">
+                <div class="metric-card">
+                    <div class="metric-label">Algorithm</div>
+                    <div class="metric-value">Non-Rigid</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Max Shift</div>
+                    <div class="metric-value">6 pixels</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Block Size</div>
+                    <div class="metric-value">128×128</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <span class="tech-label">Suite2p</span>
+                <span class="tech-label">CaImAn</span>
+                <span class="tech-label">Optical Flow</span>
+            </div>
+        </div>
+        
+        <div class="arrow-down"></div>
+        
+        <!-- Stage 3: Source Extraction -->
+        <div class="pipeline-stage">
+            <div class="stage-number">3</div>
+            <h2 class="stage-title">Neural Source Extraction</h2>
+            <p class="stage-description">
+                Automated detection and segmentation of individual neurons (ROIs) from the imaging field. 
+                Extract fluorescence time-series from each neuron while correcting for neuropil contamination 
+                from surrounding tissue.
+            </p>
+            
+            <div class="visual-container">
+                <canvas id="extractionCanvas" width="800" height="350"></canvas>
+            </div>
+            
+            <div class="metrics">
+                <div class="metric-card">
+                    <div class="metric-label">Neurons Detected</div>
+                    <div class="metric-value">156</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Cell Diameter</div>
+                    <div class="metric-value">12 μm</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Neuropil Coeff</div>
+                    <div class="metric-value">0.7</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <span class="tech-label">CNMF</span>
+                <span class="tech-label">Suite2p ROI</span>
+                <span class="tech-label">Cell Segmentation</span>
+            </div>
+        </div>
+        
+        <div class="arrow-down"></div>
+        
+        <!-- Stage 4: Spike Deconvolution -->
+        <div class="pipeline-stage">
+            <div class="stage-number">4</div>
+            <h2 class="stage-title">Spike Deconvolution</h2>
+            <p class="stage-description">
+                Infer neural spiking activity from calcium fluorescence signals. Deconvolution algorithms 
+                account for the slow kinetics of calcium indicators (τ ≈ 0.7s for GCaMP6s) to estimate 
+                the underlying action potential firing patterns.
+            </p>
+            
+            <div class="visual-container">
+                <canvas id="spikeCanvas" width="800" height="350"></canvas>
+            </div>
+            
+            <div class="metrics">
+                <div class="metric-card">
+                    <div class="metric-label">Algorithm</div>
+                    <div class="metric-value">OASIS</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Decay Time (τ)</div>
+                    <div class="metric-value">0.7 s</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Mean Firing Rate</div>
+                    <div class="metric-value">2.4 Hz</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <span class="tech-label">OASIS</span>
+                <span class="tech-label">FOOPSI</span>
+                <span class="tech-label">Wiener Filter</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Stage 1: Raw imaging data with simulated neurons
+        const rawCanvas = document.getElementById('rawCanvas');
+        const rawCtx = rawCanvas.getContext('2d');
+        
+        function drawRawImaging() {
+            const width = rawCanvas.width;
+            const height = rawCanvas.height;
+            
+            // Dark background
+            rawCtx.fillStyle = '#0a0e27';
+            rawCtx.fillRect(0, 0, width, height);
+            
+            // Add noise/texture
+            for (let i = 0; i < 2000; i++) {
+                const x = Math.random() * width;
+                const y = Math.random() * height;
+                const brightness = Math.random() * 30;
+                rawCtx.fillStyle = `rgba(${brightness}, ${brightness}, ${brightness}, 0.3)`;
+                rawCtx.fillRect(x, y, 1, 1);
+            }
+            
+            // Draw simulated neurons (circular blobs)
+            const neurons = [];
+            for (let i = 0; i < 25; i++) {
+                neurons.push({
+                    x: 50 + Math.random() * (width - 100),
+                    y: 50 + Math.random() * (height - 100),
+                    size: 15 + Math.random() * 20,
+                    brightness: 100 + Math.random() * 100
+                });
+            }
+            
+            neurons.forEach(neuron => {
+                const gradient = rawCtx.createRadialGradient(
+                    neuron.x, neuron.y, 0,
+                    neuron.x, neuron.y, neuron.size
+                );
+                gradient.addColorStop(0, `rgba(0, 255, 136, ${neuron.brightness / 255})`);
+                gradient.addColorStop(0.6, `rgba(0, 180, 100, ${neuron.brightness / 400})`);
+                gradient.addColorStop(1, 'rgba(0, 100, 60, 0)');
+                
+                rawCtx.fillStyle = gradient;
+                rawCtx.beginPath();
+                rawCtx.arc(neuron.x, neuron.y, neuron.size, 0, Math.PI * 2);
+                rawCtx.fill();
+            });
+            
+            // Label
+            rawCtx.fillStyle = '#00ff88';
+            rawCtx.font = 'bold 14px Space Mono';
+            rawCtx.fillText('Raw 2P Image (Frame 1234)', 20, 30);
+        }
+        
+        // Stage 2: Motion correction visualization
+        const motionCanvas = document.getElementById('motionCanvas');
+        const motionCtx = motionCanvas.getContext('2d');
+        
+        function drawMotionCorrection() {
+            const width = motionCanvas.width;
+            const height = motionCanvas.height;
+            
+            motionCtx.fillStyle = '#0a0e27';
+            motionCtx.fillRect(0, 0, width, height);
+            
+            // Before/After comparison
+            const midPoint = width / 2;
+            
+            // BEFORE (left side) - shifted image
+            motionCtx.save();
+            motionCtx.translate(10, 15); // Simulated shift
+            
+            for (let i = 0; i < 15; i++) {
+                const x = 30 + Math.random() * (midPoint - 80);
+                const y = 80 + Math.random() * (height - 160);
+                const size = 12 + Math.random() * 15;
+                
+                const gradient = motionCtx.createRadialGradient(x, y, 0, x, y, size);
+                gradient.addColorStop(0, 'rgba(255, 100, 100, 0.8)');
+                gradient.addColorStop(1, 'rgba(255, 100, 100, 0)');
+                
+                motionCtx.fillStyle = gradient;
+                motionCtx.beginPath();
+                motionCtx.arc(x, y, size, 0, Math.PI * 2);
+                motionCtx.fill();
+            }
+            
+            motionCtx.restore();
+            
+            // Label BEFORE
+            motionCtx.fillStyle = '#ff6464';
+            motionCtx.font = 'bold 16px Space Mono';
+            motionCtx.fillText('BEFORE', 20, 40);
+            motionCtx.fillStyle = '#8b9dc3';
+            motionCtx.font = '12px Space Mono';
+            motionCtx.fillText('Motion artifacts present', 20, 60);
+            
+            // AFTER (right side) - corrected
+            for (let i = 0; i < 15; i++) {
+                const x = midPoint + 30 + Math.random() * (midPoint - 80);
+                const y = 80 + Math.random() * (height - 160);
+                const size = 12 + Math.random() * 15;
+                
+                const gradient = motionCtx.createRadialGradient(x, y, 0, x, y, size);
+                gradient.addColorStop(0, 'rgba(0, 255, 136, 0.9)');
+                gradient.addColorStop(1, 'rgba(0, 255, 136, 0)');
+                
+                motionCtx.fillStyle = gradient;
+                motionCtx.beginPath();
+                motionCtx.arc(x, y, size, 0, Math.PI * 2);
+                motionCtx.fill();
+            }
+            
+            // Label AFTER
+            motionCtx.fillStyle = '#00ff88';
+            motionCtx.font = 'bold 16px Space Mono';
+            motionCtx.fillText('AFTER', midPoint + 20, 40);
+            motionCtx.fillStyle = '#8b9dc3';
+            motionCtx.font = '12px Space Mono';
+            motionCtx.fillText('Aligned & stabilized', midPoint + 20, 60);
+            
+            // Divider
+            motionCtx.strokeStyle = 'rgba(0, 255, 136, 0.3)';
+            motionCtx.lineWidth = 2;
+            motionCtx.setLineDash([5, 5]);
+            motionCtx.beginPath();
+            motionCtx.moveTo(midPoint, 20);
+            motionCtx.lineTo(midPoint, height - 20);
+            motionCtx.stroke();
+            motionCtx.setLineDash([]);
+            
+            // Motion vectors
+            for (let i = 0; i < 8; i++) {
+                const x = 30 + Math.random() * (midPoint - 60);
+                const y = 80 + Math.random() * (height - 160);
+                
+                motionCtx.strokeStyle = 'rgba(255, 255, 100, 0.6)';
+                motionCtx.lineWidth = 2;
+                motionCtx.beginPath();
+                motionCtx.moveTo(x, y);
+                motionCtx.lineTo(x + midPoint - 20, y - 5 + Math.random() * 10);
+                motionCtx.stroke();
+                
+                // Arrowhead
+                motionCtx.fillStyle = 'rgba(255, 255, 100, 0.6)';
+                motionCtx.beginPath();
+                motionCtx.moveTo(x + midPoint - 20, y - 5 + Math.random() * 10);
+                motionCtx.lineTo(x + midPoint - 28, y - 8 + Math.random() * 10);
+                motionCtx.lineTo(x + midPoint - 28, y - 2 + Math.random() * 10);
+                motionCtx.fill();
+            }
+        }
+        
+        // Stage 3: Source extraction
+        const extractionCanvas = document.getElementById('extractionCanvas');
+        const extractionCtx = extractionCanvas.getContext('2d');
+        
+        function drawSourceExtraction() {
+            const width = extractionCanvas.width;
+            const height = extractionCanvas.height;
+            
+            extractionCtx.fillStyle = '#0a0e27';
+            extractionCtx.fillRect(0, 0, width, height);
+            
+            // Left: Image with ROI outlines
+            const imageWidth = width * 0.45;
+            
+            // Background image
+            for (let i = 0; i < 1500; i++) {
+                const x = Math.random() * imageWidth;
+                const y = Math.random() * height;
+                const brightness = Math.random() * 30;
+                extractionCtx.fillStyle = `rgba(${brightness}, ${brightness}, ${brightness}, 0.2)`;
+                extractionCtx.fillRect(x, y, 1, 1);
+            }
+            
+            // Draw ROI masks
+            const rois = [];
+            for (let i = 0; i < 20; i++) {
+                rois.push({
+                    x: 30 + Math.random() * (imageWidth - 60),
+                    y: 80 + Math.random() * (height - 160),
+                    size: 18 + Math.random() * 15
+                });
+            }
+            
+            rois.forEach((roi, idx) => {
+                // Fill
+                const gradient = extractionCtx.createRadialGradient(
+                    roi.x, roi.y, 0,
+                    roi.x, roi.y, roi.size
+                );
+                gradient.addColorStop(0, 'rgba(0, 255, 136, 0.4)');
+                gradient.addColorStop(1, 'rgba(0, 255, 136, 0)');
+                extractionCtx.fillStyle = gradient;
+                extractionCtx.beginPath();
+                extractionCtx.arc(roi.x, roi.y, roi.size, 0, Math.PI * 2);
+                extractionCtx.fill();
+                
+                // Outline
+                extractionCtx.strokeStyle = '#00ff88';
+                extractionCtx.lineWidth = 2;
+                extractionCtx.beginPath();
+                extractionCtx.arc(roi.x, roi.y, roi.size, 0, Math.PI * 2);
+                extractionCtx.stroke();
+                
+                // ROI number
+                extractionCtx.fillStyle = '#00ff88';
+                extractionCtx.font = 'bold 10px Space Mono';
+                extractionCtx.fillText(`${idx + 1}`, roi.x - 8, roi.y + 4);
+            });
+            
+            extractionCtx.fillStyle = '#00ff88';
+            extractionCtx.font = 'bold 14px Space Mono';
+            extractionCtx.fillText('ROI Segmentation', 20, 30);
+            extractionCtx.fillStyle = '#8b9dc3';
+            extractionCtx.font = '11px Space Mono';
+            extractionCtx.fillText('20 neurons detected', 20, 50);
+            
+            // Right: Fluorescence traces
+            const traceStart = width * 0.55;
+            const traceWidth = width * 0.4;
+            const traceHeight = height - 100;
+            
+            extractionCtx.fillStyle = '#00ff88';
+            extractionCtx.font = 'bold 14px Space Mono';
+            extractionCtx.fillText('ΔF/F Traces', traceStart, 30);
+            
+            // Draw multiple traces
+            for (let i = 0; i < 8; i++) {
+                const y = 80 + i * 30;
+                
+                extractionCtx.strokeStyle = `rgba(0, 255, 136, ${0.4 + Math.random() * 0.4})`;
+                extractionCtx.lineWidth = 1.5;
+                extractionCtx.beginPath();
+                
+                let lastY = y;
+                for (let x = 0; x < traceWidth; x += 2) {
+                    const noise = (Math.random() - 0.5) * 3;
+                    const signal = Math.sin(x * 0.02 + i) * 8 + Math.random() * 15;
+                    const newY = y + noise + signal;
+                    
+                    if (x === 0) {
+                        extractionCtx.moveTo(traceStart + x, newY);
+                    } else {
+                        extractionCtx.lineTo(traceStart + x, newY);
+                    }
+                    lastY = newY;
+                }
+                extractionCtx.stroke();
+                
+                // Neuron label
+                extractionCtx.fillStyle = '#8b9dc3';
+                extractionCtx.font = '9px Space Mono';
+                extractionCtx.fillText(`N${i + 1}`, traceStart - 25, y + 3);
+            }
+            
+            // Time axis
+            extractionCtx.strokeStyle = 'rgba(139, 157, 195, 0.3)';
+            extractionCtx.lineWidth = 1;
+            extractionCtx.beginPath();
+            extractionCtx.moveTo(traceStart, height - 40);
+            extractionCtx.lineTo(traceStart + traceWidth, height - 40);
+            extractionCtx.stroke();
+            
+            extractionCtx.fillStyle = '#8b9dc3';
+            extractionCtx.font = '10px Space Mono';
+            extractionCtx.fillText('0s', traceStart, height - 20);
+            extractionCtx.fillText('10s', traceStart + traceWidth - 20, height - 20);
+        }
+        
+        // Stage 4: Spike deconvolution
+        const spikeCanvas = document.getElementById('spikeCanvas');
+        const spikeCtx = spikeCanvas.getContext('2d');
+        
+        function drawSpikeDeconvolution() {
+            const width = spikeCanvas.width;
+            const height = spikeCanvas.height;
+            
+            spikeCtx.fillStyle = '#0a0e27';
+            spikeCtx.fillRect(0, 0, width, height);
+            
+            const margin = 50;
+            const plotWidth = width - 2 * margin;
+            const plotHeight = (height - 100) / 3;
+            
+            // Generate simulated data
+            const numPoints = 400;
+            const calciumTrace = [];
+            const spikeTrace = [];
+            
+            let calciumLevel = 0;
+            for (let i = 0; i < numPoints; i++) {
+                // Random spikes
+                const spike = Math.random() > 0.97 ? 1 : 0;
+                spikeTrace.push(spike);
+                
+                // Calcium trace (exponential decay)
+                calciumLevel = calciumLevel * 0.97 + spike * 30;
+                calciumTrace.push(calciumLevel + Math.random() * 2);
+            }
+            
+            // Plot 1: Raw calcium trace
+            spikeCtx.fillStyle = '#8b9dc3';
+            spikeCtx.font = 'bold 12px Space Mono';
+            spikeCtx.fillText('Calcium Fluorescence (ΔF/F)', margin, 30);
+            
+            spikeCtx.strokeStyle = '#00d4aa';
+            spikeCtx.lineWidth = 2;
+            spikeCtx.beginPath();
+            
+            for (let i = 0; i < numPoints; i++) {
+                const x = margin + (i / numPoints) * plotWidth;
+                const y = 60 + plotHeight - (calciumTrace[i] / 40) * (plotHeight - 20);
+                
+                if (i === 0) spikeCtx.moveTo(x, y);
+                else spikeCtx.lineTo(x, y);
+            }
+            spikeCtx.stroke();
+            
+            // Axes
+            spikeCtx.strokeStyle = 'rgba(139, 157, 195, 0.3)';
+            spikeCtx.lineWidth = 1;
+            spikeCtx.beginPath();
+            spikeCtx.moveTo(margin, 60);
+            spikeCtx.lineTo(margin, 60 + plotHeight);
+            spikeCtx.lineTo(margin + plotWidth, 60 + plotHeight);
+            spikeCtx.stroke();
+            
+            // Plot 2: Deconvolved spikes
+            const plot2Y = 60 + plotHeight + 40;
+            
+            spikeCtx.fillStyle = '#8b9dc3';
+            spikeCtx.font = 'bold 12px Space Mono';
+            spikeCtx.fillText('Inferred Spike Events', margin, plot2Y - 10);
+            
+            for (let i = 0; i < numPoints; i++) {
+                if (spikeTrace[i] > 0) {
+                    const x = margin + (i / numPoints) * plotWidth;
+                    
+                    spikeCtx.strokeStyle = '#00ff88';
+                    spikeCtx.lineWidth = 2;
+                    spikeCtx.beginPath();
+                    spikeCtx.moveTo(x, plot2Y + plotHeight);
+                    spikeCtx.lineTo(x, plot2Y + 10);
+                    spikeCtx.stroke();
+                }
+            }
+            
+            // Axes
+            spikeCtx.strokeStyle = 'rgba(139, 157, 195, 0.3)';
+            spikeCtx.lineWidth = 1;
+            spikeCtx.beginPath();
+            spikeCtx.moveTo(margin, plot2Y);
+            spikeCtx.lineTo(margin, plot2Y + plotHeight);
+            spikeCtx.lineTo(margin + plotWidth, plot2Y + plotHeight);
+            spikeCtx.stroke();
+            
+            // Plot 3: Raster plot
+            const plot3Y = plot2Y + plotHeight + 40;
+            
+            spikeCtx.fillStyle = '#8b9dc3';
+            spikeCtx.font = 'bold 12px Space Mono';
+            spikeCtx.fillText('Multi-Neuron Raster', margin, plot3Y - 10);
+            
+            // Multiple neurons
+            for (let neuron = 0; neuron < 8; neuron++) {
+                for (let i = 0; i < numPoints; i++) {
+                    if (Math.random() > 0.98) {
+                        const x = margin + (i / numPoints) * plotWidth;
+                        const y = plot3Y + neuron * 8 + 5;
+                        
+                        spikeCtx.fillStyle = '#00ff88';
+                        spikeCtx.fillRect(x - 1, y, 2, 6);
+                    }
+                }
+            }
+            
+            // Axes
+            spikeCtx.strokeStyle = 'rgba(139, 157, 195, 0.3)';
+            spikeCtx.lineWidth = 1;
+            spikeCtx.beginPath();
+            spikeCtx.moveTo(margin, plot3Y);
+            spikeCtx.lineTo(margin, plot3Y + 70);
+            spikeCtx.lineTo(margin + plotWidth, plot3Y + 70);
+            spikeCtx.stroke();
+            
+            // Time label
+            spikeCtx.fillStyle = '#8b9dc3';
+            spikeCtx.font = '11px Space Mono';
+            spikeCtx.fillText('Time (seconds)', width / 2 - 40, height - 10);
+        }
+        
+        // Draw all visualizations
+        drawRawImaging();
+        drawMotionCorrection();
+        drawSourceExtraction();
+        drawSpikeDeconvolution();
+    </script>
+</body>
+</html>

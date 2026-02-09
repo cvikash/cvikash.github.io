@@ -38,20 +38,6 @@ classes: wide
 
       <div class="project-row">
         <div class="project-col-title">
-          <h3 class="project-title-compact">Alterations of specific cortical GABAergic circuits in Down syndrome</h3>
-          <span class="project-year">2020</span>
-        </div>
-        <div class="project-col-description">
-          <p>Developed computational methods to detect Up/Down states in cortical LFP recordings. Revealed how specific GABAergic circuit alterations lead to abnormal network activity in Down syndrome mouse models.</p>
-        </div>
-        <div class="project-col-links">
-          <a href="/projects/down-syndrome-gaba-circuits/" class="project-link">Details</a>
-          <a href="https://elifesciences.org/articles/58731" target="_blank" class="project-link">Paper</a>
-        </div>
-      </div>
-
-      <div class="project-row">
-        <div class="project-col-title">
           <h3 class="project-title-compact">Behavioral motifs identification in freely swimming zebrafish using autoregressive hidden markov models (ARHMMs)</h3>
           <span class="project-year">2023</span>
         </div>
@@ -75,6 +61,20 @@ classes: wide
         <div class="project-col-links">
           <a href="/projects/cb1-visual-cortex/" class="project-link">Details</a>
           <a href="https://doi.org/10.1016/j.celrep.2022.111202" target="_blank" class="project-link">Paper</a>
+        </div>
+      </div>
+
+      <div class="project-row">
+        <div class="project-col-title">
+          <h3 class="project-title-compact">Alterations of specific cortical GABAergic circuits in Down syndrome</h3>
+          <span class="project-year">2020</span>
+        </div>
+        <div class="project-col-description">
+          <p>Developed computational methods to detect Up/Down states in cortical LFP recordings. Revealed how specific GABAergic circuit alterations lead to abnormal network activity in Down syndrome mouse models.</p>
+        </div>
+        <div class="project-col-links">
+          <a href="/projects/down-syndrome-gaba-circuits/" class="project-link">Details</a>
+          <a href="https://elifesciences.org/articles/58731" target="_blank" class="project-link">Paper</a>
         </div>
       </div>
 

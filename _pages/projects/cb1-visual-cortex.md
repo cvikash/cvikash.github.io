@@ -5,13 +5,6 @@ permalink: /projects/cb1-visual-cortex/
 classes: wide
 ---
 
-<section class="page-hero">
-  <div class="container">
-    <h1 class="page-hero__title">Visual-area-specific tonic modulation of GABA release by endocannabinoids sets the activity and coordination of neocortical principal neurons</h1>
-    <p class="page-hero__subtitle">How CB1+ interneurons differentially control neural activity in primary and associative visual cortex</p>
-  </div>
-</section>
-
 <section class="page-content">
   <div class="container">
     <!-- Publication Info -->
@@ -36,6 +29,20 @@ classes: wide
       <p style="font-size: 1.125rem; line-height: 1.9; color: var(--color-text-secondary); margin-bottom: 2rem;">
         This study investigated the role of a specific type of inhibitory neuron—cannabinoid receptor type 1 (CB1)-expressing basket cells—in controlling neural activity across different visual areas. These interneurons target the cell bodies of pyramidal neurons, making them powerful controllers of spike generation. But their properties and roles in neocortical circuits have remained largely mysterious. My contribution to this work focused on developing and implementing an <strong>end-to-end analysis pipeline</strong> for processing two-photon calcium imaging data, from motion registration through source extraction, deconvolution, and final data analysis.
       </p>
+    </div>
+
+    <!-- Graphical Abstract -->
+    <div class="content-card blog-style">
+      <div class="figure-item" style="margin: 2rem 0;">
+        <div class="figure-image">
+          <img src="/assets/images/project_cb1_visual/main_graphical_abstract.png" alt="Graphical abstract: Visual-area-specific tonic modulation of GABA release by endocannabinoids" loading="lazy">
+        </div>
+        <div class="figure-caption">
+          <strong>Graphical Abstract:</strong> CB1+ basket cells exhibit visual-area-specific connectivity patterns and function. 
+          Tonic CB1 signaling suppresses GABA release from CB1+ interneurons in V2M but not in V1, leading to differential 
+          control of pyramidal neuron activity and coordination across visual cortical areas.
+        </div>
+      </div>
     </div>
 
     <!-- The Question -->
@@ -73,6 +80,23 @@ classes: wide
       <p>
         Each stage of this pipeline required careful optimization. Motion registration needs to be robust to different types of movement. Source extraction must accurately identify neurons even when they overlap or have weak signals. Deconvolution algorithms need to balance accuracy with computational efficiency. And the final analysis must handle the statistical challenges of comparing activity across different brain areas and conditions.
       </p>
+
+      <div class="figure-item" style="margin: 3rem 0;">
+        <div class="figure-image" style="padding: 0; background: transparent;">
+          <iframe 
+            src="/assets/images/project_cb1_visual/calcium_pipeline_diagram.html" 
+            style="width: 100%; min-height: 1200px; border: none; border-radius: var(--radius-xl); overflow: hidden;"
+            title="Two-Photon Calcium Imaging Pipeline"
+            loading="lazy">
+          </iframe>
+        </div>
+        <div class="figure-caption">
+          <strong>Calcium Imaging Analysis Pipeline:</strong> Interactive visualization of the end-to-end processing pipeline 
+          for two-photon calcium imaging data. The pipeline transforms raw imaging data through four critical stages: 
+          (1) Raw calcium imaging data acquisition, (2) Motion correction and registration, (3) Neural source extraction 
+          and ROI segmentation, and (4) Spike deconvolution to infer neural firing patterns from calcium signals.
+        </div>
+      </div>
     </div>
 
     <!-- The Discovery -->

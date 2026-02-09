@@ -16,13 +16,6 @@ classes: wide
 }
 </style>
 
-<section class="page-hero">
-  <div class="container">
-    <h1 class="page-hero__title">Neural and behavioral organization of rapid eye movement sleep in zebrafish</h1>
-    <p class="page-hero__subtitle">How we discovered REM sleep in fish and what it tells us about the evolution of sleep</p>
-  </div>
-</section>
-
 <section class="page-content">
   <div class="container">
     <!-- Publication Info -->
