@@ -2041,16 +2041,20 @@ body:has([data-page="rem-sleep"]) .figure-image {
     align-items: center;
     justify-content: center;
     background: #fff;
-    padding: 6px;
-    flex-shrink: 0;
+    padding: 8px 14px;
+    flex: 0 0 260px;
+    width: 260px;
+    min-width: 260px;
+    max-width: 260px;
     border-right: 3px solid #e53e3e;
     overflow: hidden;
-    width: 280px;
+    box-sizing: border-box;
   }
 
   &__logo {
-    width: 90%;
-    height: auto;
+    height: 44px;
+    width: auto;
+    max-width: 100%;
     display: block;
     object-fit: contain;
   }
